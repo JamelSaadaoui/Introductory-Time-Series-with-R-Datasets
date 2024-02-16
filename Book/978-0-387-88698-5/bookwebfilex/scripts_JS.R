@@ -9,6 +9,18 @@ setwd('C:\\Users\\jamel\\Documents\\GitHub\\Introductory-Time-Series-with-R-Data
 #
 #
 
+###################################
+
+data(AirPassengers)
+AP <- AirPassengers
+AP
+
+class(AP)
+
+start(AP); end(AP); frequency(AP)
+
+###################################
+
 www = "cbe.dat"
 cbe = read.table(www, head=T)
 choc.ts <- ts(cbe[,1], st=1958, fr=12)
@@ -95,6 +107,16 @@ get.best.arima <- function(x.ts, maxord = c(1,1,1,1,1,1))
     }
   list(best.aic, best.fit, best.model)
 }
+
+best.arima.elec <- get.best.arima( log(Elec.ts),
+                                   maxord = c(2,2,2,2,2,2))
+
+best.fit.elec <- best.arima.elec[[2]]
+acf( resid(best.fit.elec) )
+best.arima.elec [[3]]
+
+ts.plot( cbind( window(Elec.ts,start = 1981),
+                exp(predict(best.fit.elec,12)$pred) ), lty = 1:2)
 
 # Chapter 7, p149, simulated GARCH model
 set.seed(1)
