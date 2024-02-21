@@ -19,6 +19,8 @@ class(AP)
 
 start(AP); end(AP); frequency(AP)
 
+plot(AP, ylab = "Passengers (1000's)")
+
 ###################################
 
 www = "cbe.dat"
